@@ -18,7 +18,7 @@
   ],
   "main": "dist/core/reactgrid.js",
   "module": "dist/core/reactgrid.esm.js",
-  "types": "reactgrid.d.ts",
+  "types": "dist/reactgrid.d.ts",
   "devDependencies": {
     "@cypress/snapshot": "^2.1.7",
     "@rollup/plugin-commonjs": "^17.0.0",
