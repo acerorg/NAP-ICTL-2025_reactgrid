@@ -4,19 +4,42 @@ import { getVisibleSizeOfReactGrid } from '../Functions/elementSizeHelpers';
 import { AbstractPointerEventsController } from './AbstractPointerEventsController';
 import { StateModifier, StateUpdater } from './State';
 import { PointerEvent, KeyboardEvent, ClipboardEvent, FocusEvent } from './domEventsTypes';
+import { ClipboardHandler } from './PublicModel';
 import { updateResponsiveSticky } from '../Functions/updateResponsiveSticky';
+
+/**
+ * Event handlers globally overridable via outer `ReactGridProps`
+ */
+interface EventOverrides {
+    onClipboardCopy?: ClipboardHandler,
+    onClipboardCut?: ClipboardHandler,
+    onClipboardPaste?: ClipboardHandler,
+}
 
 export class EventHandlers {
 
-    constructor(public updateState: StateUpdater, public pointerEventsController: AbstractPointerEventsController) { }
+    constructor(
+        public updateState: StateUpdater, 
+        public pointerEventsController: AbstractPointerEventsController,
+        public eventHandlerOverrides?: EventOverrides
+    ) { }
 
     pointerDownHandler = (event: PointerEvent): void => this.updateState(state => this.pointerEventsController.handlePointerDown(event, state));
     keyDownHandler = (event: KeyboardEvent): void => this.updateState(state => state.currentBehavior.handleKeyDown(event, state));
     keyUpHandler = (event: KeyboardEvent): void => this.updateState(state => state.currentBehavior.handleKeyUp(event, state));
     compositionEndHandler = (event: CompositionEvent): void => this.updateState(state => state.currentBehavior.handleCompositionEnd(event, state));
-    copyHandler = (event: ClipboardEvent): void => this.updateState(state => state.currentBehavior.handleCopy(event, state));
-    pasteHandler = (event: ClipboardEvent): void => this.updateState(state => state.currentBehavior.handlePaste(event, state));
-    cutHandler = (event: ClipboardEvent): void => this.updateState(state => state.currentBehavior.handleCut(event, state));
+    copyHandler = (event: ClipboardEvent): void =>
+        this.eventHandlerOverrides?.onClipboardCopy
+            ? this.eventHandlerOverrides.onClipboardCopy(event)
+            : this.updateState(state => state.currentBehavior.handleCopy(event, state));
+    pasteHandler = (event: ClipboardEvent): void =>
+        this.eventHandlerOverrides?.onClipboardCut
+            ? this.eventHandlerOverrides.onClipboardCut(event)
+            : this.updateState(state => state.currentBehavior.handlePaste(event, state));
+    cutHandler = (event: ClipboardEvent): void =>
+        this.eventHandlerOverrides?.onClipboardPaste
+            ? this.eventHandlerOverrides.onClipboardPaste(event)
+            : this.updateState(state => state.currentBehavior.handleCut(event, state));
     blurHandler = (event: FocusEvent): void => this.updateState(state => {
         if ((event.target as HTMLInputElement)?.id?.startsWith('react-select-')) { // give back focus on react-select dropdown blur
             state.hiddenFocusElement?.focus({ preventScroll: true });

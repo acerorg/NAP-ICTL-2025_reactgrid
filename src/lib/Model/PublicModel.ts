@@ -11,6 +11,7 @@ import {
 } from './../CellTemplates';
 
 import { Range } from './Range';
+import { ClipboardEvent } from './domEventsTypes';
 
 /**
  * `Range` is a class. This class represents a rectangular area with a width, height, upper-left position, and lower-right position.
@@ -26,6 +27,12 @@ export type SelectionMode =
     | 'row'
     | 'column'
     | 'range'
+
+/**
+ * `ClipboardHandler` callbacks allow overriding the built-in keyboard shortcut handling
+ */
+export type ClipboardHandler =
+    (event: ClipboardEvent) => void
 
 /**
  * `ReactGrid`'s component props
@@ -206,6 +213,25 @@ export interface ReactGridProps {
      * @returns {boolean} Return `true` to allow droping column at specific column
      */
     readonly canReorderRows?: (targetRowId: Id, rowIds: Id[], dropPosition: DropPosition) => boolean;
+
+    /**
+     * Override built-in clipboard 'copy' action
+     * @param {ClipboardEvent} event DOM event triggered by clipboard action
+     * @returns {void}
+     */
+    readonly onClipboardCopy?: ClipboardHandler,
+    /**
+     * Override built-in clipboard 'paste' action
+     * @param {ClipboardEvent} event DOM event triggered by clipboard action
+     * @returns {void}
+     */
+    readonly onClipboardPaste?: ClipboardHandler,
+    /**
+     * Override built-in clipboard 'cut' action
+     * @param {ClipboardEvent} event DOM event triggered by clipboard action
+     * @returns {void}
+     */
+    readonly onClipboardCut?: ClipboardHandler,
 }
 
 

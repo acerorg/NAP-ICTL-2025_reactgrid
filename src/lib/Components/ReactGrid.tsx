@@ -34,7 +34,12 @@ export class ReactGrid extends React.Component<ReactGridProps, State> {
   );
   private eventHandlers = new EventHandlers(
     this.stateUpdater,
-    this.pointerEventsController
+    this.pointerEventsController,
+    {
+      onClipboardCopy: this.props.onClipboardCopy,
+      onClipboardCut: this.props.onClipboardCut,
+      onClipboardPaste: this.props.onClipboardPaste,
+    },
   );
   private cellMatrixBuilder = new CellMatrixBuilder();
   state: State = {
