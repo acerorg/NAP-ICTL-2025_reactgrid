@@ -16,8 +16,8 @@
     "datagrid",
     "datatable"
   ],
-  "main": "core/reactgrid.js",
-  "module": "core/reactgrid.esm.js",
+  "main": "dist/core/reactgrid.js",
+  "module": "dist/core/reactgrid.esm.js",
   "types": "reactgrid.d.ts",
   "devDependencies": {
     "@cypress/snapshot": "^2.1.7",
