@@ -58,6 +58,7 @@
     "react-dom": "^16.13.1 || ^17.0.0 || ^18.2.0"
   },
   "scripts": {
+    "prepare": "npm run pre-deploy",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "pre-deploy": "npx rollup -c",
