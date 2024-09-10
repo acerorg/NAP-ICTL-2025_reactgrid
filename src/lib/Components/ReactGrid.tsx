@@ -36,9 +36,9 @@ export class ReactGrid extends React.Component<ReactGridProps, State> {
     this.stateUpdater,
     this.pointerEventsController,
     {
-      onClipboardCopy: this.props.onClipboardCopy,
-      onClipboardCut: this.props.onClipboardCut,
-      onClipboardPaste: this.props.onClipboardPaste,
+      onClipboardCopy: () => this.props.onClipboardCopy,
+      onClipboardCut: () => this.props.onClipboardCut,
+      onClipboardPaste: () => this.props.onClipboardPaste,
     },
   );
   private cellMatrixBuilder = new CellMatrixBuilder();
