@@ -38,12 +38,12 @@ export class EventHandlers {
             : this.updateState(state => state.currentBehavior.handleCopy(event, state));
     };
     pasteHandler = (event: ClipboardEvent): void => {
-        const cb = unwrapHandler(this.eventHandlerOverrides?.onClipboardCut);
+        const cb = unwrapHandler(this.eventHandlerOverrides?.onClipboardPaste);
         return cb !== undefined ? cb(event)
             : this.updateState(state => state.currentBehavior.handlePaste(event, state));
     };
     cutHandler = (event: ClipboardEvent): void => {
-        const cb = unwrapHandler(this.eventHandlerOverrides?.onClipboardPaste);
+        const cb = unwrapHandler(this.eventHandlerOverrides?.onClipboardCut);
         return cb !== undefined ? cb(event)
             : this.updateState(state => state.currentBehavior.handleCut(event, state));
     };
