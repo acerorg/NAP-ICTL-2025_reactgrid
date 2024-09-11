@@ -29,10 +29,12 @@ export type SelectionMode =
     | 'range'
 
 /**
- * `ClipboardHandler` callbacks allow overriding the built-in keyboard shortcut handling
+ * `ClipboardHandler` callbacks allow overriding the built-in keyboard shortcut handling.
+ * The `event` is optional in order to allow binding pre-curried callbacks which do not need
+ * to infer upon the source `ClipboardEvent`.
  */
 export type ClipboardHandler =
-    (event: ClipboardEvent) => void
+    (event?: ClipboardEvent) => void
 
 /**
  * `ReactGrid`'s component props
