@@ -27,7 +27,7 @@ export function focusLocation(state: State, location: Location, applyResetSelect
     
     
     const { onFocusLocationChanged, onFocusLocationChanging, focusLocation } = state.props;
-
+console.info('about to focus location', onFocusLocationChanged, onFocusLocationChanging, focusLocation);
     const { cell, cellTemplate } = getCompatibleCellAndTemplate(state, location);
     const cellLocation = { rowId: location.row.rowId, columnId: location.column.columnId };
 
@@ -41,7 +41,12 @@ export function focusLocation(state: State, location: Location, applyResetSelect
 
     const isLocationAcceptable = areLocationsEqual(location, state.focusedLocation)
         || (forcedLocation ? areLocationsEqual(location, forcedLocation) : true);
-
+console.log({
+  isCellTemplateFocusable,
+  isChangeAllowedByUser,
+  isLocationAcceptable,
+  applyResetSelection,
+});
     if (!isCellTemplateFocusable || !isChangeAllowedByUser || !isLocationAcceptable) {
         return state;
     }
@@ -51,7 +56,7 @@ export function focusLocation(state: State, location: Location, applyResetSelect
     }
 
     const validatedFocusLocation = state.cellMatrix.validateLocation(location);
-
+console.log({ validatedFocusLocation });
     if (applyResetSelection) {
         // TODO is `location` really needed
         state = resetSelection(
