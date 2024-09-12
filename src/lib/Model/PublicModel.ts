@@ -37,6 +37,13 @@ export type ClipboardHandler =
     (event?: ClipboardEvent) => void
 
 /**
+ * The handler for a clipboard "paste" event must derive its input from the source
+ * `ClipboardEvent`, unlike other events in which reading the source event data is optional.
+ */
+export type ClipboardPasteHandler =
+    (event: ClipboardEvent) => void
+
+/**
  * `ReactGrid`'s component props
  * 
  * @see https://reactgrid.com/docs/3.1/7-api/0-interfaces/1-reactgrid-props/
@@ -227,7 +234,7 @@ export interface ReactGridProps {
      * @param {ClipboardEvent} event DOM event triggered by clipboard action
      * @returns {void}
      */
-    readonly onClipboardPaste?: ClipboardHandler,
+    readonly onClipboardPaste?: ClipboardPasteHandler,
     /**
      * Override built-in clipboard 'cut' action
      * @param {ClipboardEvent} event DOM event triggered by clipboard action

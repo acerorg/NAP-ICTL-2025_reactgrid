@@ -4,7 +4,7 @@ import { getVisibleSizeOfReactGrid } from '../Functions/elementSizeHelpers';
 import { AbstractPointerEventsController } from './AbstractPointerEventsController';
 import { StateModifier, StateUpdater } from './State';
 import { PointerEvent, KeyboardEvent, ClipboardEvent, FocusEvent } from './domEventsTypes';
-import { ClipboardHandler } from './PublicModel';
+import { ClipboardHandler, ClipboardPasteHandler } from './PublicModel';
 import { updateResponsiveSticky } from '../Functions/updateResponsiveSticky';
 
 /**
@@ -13,7 +13,7 @@ import { updateResponsiveSticky } from '../Functions/updateResponsiveSticky';
 interface EventOverrides {
     onClipboardCopy?: () => ClipboardHandler | undefined,
     onClipboardCut?: () => ClipboardHandler | undefined,
-    onClipboardPaste?: () => ClipboardHandler | undefined,
+    onClipboardPaste?: () => ClipboardPasteHandler | undefined,
 }
 
 function unwrapHandler(thunked?: () => ClipboardHandler | undefined) {
@@ -38,7 +38,7 @@ export class EventHandlers {
             : this.updateState(state => state.currentBehavior.handleCopy(event, state));
     };
     pasteHandler = (event: ClipboardEvent): void => {
-        const cb = unwrapHandler(this.eventHandlerOverrides?.onClipboardPaste);
+        const cb = unwrapHandler(this.eventHandlerOverrides?.onClipboardPaste as () => ClipboardHandler | undefined);
         return cb !== undefined ? cb(event)
             : this.updateState(state => state.currentBehavior.handlePaste(event, state));
     };
