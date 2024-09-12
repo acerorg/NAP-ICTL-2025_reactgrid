@@ -8,6 +8,11 @@ import { keyCodes } from './keyCodes';
 
 
 export function focusLocation(state: State, location: Location, applyResetSelection = true, keyCode?: keyCodes): State {
+console.info('FOCUS REQUESTED', {
+  focusedLocation: state.focusedLocation,
+  location,
+  currentlyEditedCell: state.currentlyEditedCell,
+})
     // Need to determine if there is an edited cell &&The cell gets focus &&did not press Enter
     if (
       state.focusedLocation &&
