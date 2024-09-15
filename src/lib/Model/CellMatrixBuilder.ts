@@ -110,6 +110,17 @@ export class CellMatrixBuilder implements ICellMatrixBuilder {
           const columns = colspan
             ? this.cellMatrix.columns.slice(idx, idx + colspan)
             : [this.cellMatrix.columns[idx]];
+
+          if (columns.length && columns[0] === undefined) {
+            console.warn(
+              `null column ref in cell matrix update: row len ${
+                row.cells.length
+              } exceeds column count ${
+                this.cellMatrix.columns.length
+              }`);
+            return;
+          }
+
           const range = new Range(rows, columns);
           rangesToExclude = [
             ...rangesToExclude,
