@@ -112,6 +112,7 @@ export class CellMatrixBuilder implements ICellMatrixBuilder {
             : [this.cellMatrix.columns[idx]];
 if (columns.length && columns[0] === undefined) {
   console.error('!!!', this.cellMatrix.columns, row.cells, cell, idx, idy);
+  return;
 }
           const range = new Range(rows, columns);
           rangesToExclude = [
