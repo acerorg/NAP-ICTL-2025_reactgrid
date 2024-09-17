@@ -19,6 +19,7 @@ import { KeyboardEvents } from '../Components/GridRenderer';
  * `Range` is a class. This class represents a rectangular area with a width, height, upper-left position, and lower-right position.
  */
 export { Range }
+export type { KeyboardEvents }
 
 /**
  * `SelectionMode` is a marker for currect selection mode
