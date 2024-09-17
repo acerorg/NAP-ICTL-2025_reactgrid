@@ -24,7 +24,7 @@ export interface KeyboardEvents {
 }
 
 const GridRendererInternal = (
-    { eventHandlers, children }: GridRendererProps & { children: React.ReactChild },
+    { eventHandlers, children }: GridRendererProps & { children: React.ReactNode },
     ref: React.ForwardedRef<KeyboardEvents>,
 ) => {
     const { cellMatrix, props } = useReactGridState();
