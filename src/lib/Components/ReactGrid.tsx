@@ -1,10 +1,11 @@
-import * as React from "react";
+import React, { createRef } from "react";
 import { CellRenderer, ReactGridProps } from "../../core";
 import {
   GridRenderer,
   LegacyBrowserGridRenderer,
   StateModifier,
   CellEditorRenderer,
+  KeyboardEvents,
   handleStateUpdate,
 } from "../../core";
 import { PointerEventsController } from "../Model/PointerEventsController";
@@ -126,7 +127,7 @@ export class ReactGrid extends React.Component<ReactGridProps, State> {
 
     return (
       <StateProvider state={state}>
-        <GridRenderer eventHandlers={eventHandlers}>
+        <GridRenderer eventHandlers={eventHandlers} ref={this.props.eventHandlersRef}>
           <PanesRenderer cellRenderer={CellRenderer} />
 
           <Line />

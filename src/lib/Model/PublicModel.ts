@@ -6,12 +6,14 @@
  * Michael Matejko
  */
 
+import React from 'react';
 import {
     TextCell, HeaderCell, CheckboxCell, DateCell, EmailCell, ChevronCell, NumberCell, TimeCell, DropdownCell
 } from './../CellTemplates';
 
 import { Range } from './Range';
 import { ClipboardEvent } from './domEventsTypes';
+import { KeyboardEvents } from '../Components/GridRenderer';
 
 /**
  * `Range` is a class. This class represents a rectangular area with a width, height, upper-left position, and lower-right position.
@@ -118,6 +120,12 @@ export interface ReactGridProps {
      * Used to limit the width column can be resized down to.
      */
     readonly minColumnWidth?: number;
+
+    /**
+     * Allows exposing internal keyboard events in order that other
+     * page controls can bind to the spreadsheet interaction behaviours.
+     */
+    readonly eventHandlersRef?: React.Ref<KeyboardEvents>,
 
     /** 
      * Called when cell was changed (e.g. property `value`)
