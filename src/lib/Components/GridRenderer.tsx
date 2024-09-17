@@ -6,10 +6,10 @@ import { useReactGridState } from './StateProvider';
 import { isBrowserFirefox } from '../Functions/firefox';
 import { KeyboardEvent, PointerEvent, ClipboardEvent, FocusEvent } from '../Model/domEventsTypes';
 
-type KeyboardEventHandler = (event: KeyboardEvent) => void;
-type PointerEventHandler = (event: PointerEvent) => void;
-type ClipboardEventHandler = (event: ClipboardEvent) => void;
-type BlurEventHandler = (event: FocusEvent) => void;
+export type KeyboardEventHandler = (event: KeyboardEvent) => void;
+export type PointerEventHandler = (event: PointerEvent) => void;
+export type ClipboardEventHandler = (event: ClipboardEvent) => void;
+export type BlurEventHandler = (event: FocusEvent) => void;
 
 export interface KeyboardEvents {
     onKeyDown: KeyboardEventHandler,
