@@ -12,7 +12,7 @@ type ClipboardEventHandler = (event: ClipboardEvent) => void;
 type BlurEventHandler = (event: FocusEvent) => void;
 
 export interface KeyboardEvents {
-    keyDown: KeyboardEventHandler,
+    onKeyDown: KeyboardEventHandler,
     onKeyUp: KeyboardEventHandler,
     onCompositionEnd: KeyboardEventHandler,
     onPointerDown: PointerEventHandler,
@@ -34,7 +34,7 @@ const GridRendererInternal = (
     };
 
     useImperativeHandle(ref, () => ({
-        keyDown: eventHandlers.keyDownHandler,
+        onKeyDown: eventHandlers.keyDownHandler,
         onKeyUp: eventHandlers.keyUpHandler,
         onCompositionEnd: eventHandlers.compositionEndHandler as any,
         onPointerDown: eventHandlers.pointerDownHandler,
